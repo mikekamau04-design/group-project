@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Checkout</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#222;
+}
+
+header{
+background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 5%;
+}
+
+.logo{
+font-size:2rem;
+font-weight:700;
+color:#0b8f4d;
+}
+
+.logo span{
+color:#ff8c00;
+}
+
+.search{
+flex:1;
+margin:0 30px;
+}
+
+.search input{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:40px;
+}
+
+.links a{
+text-decoration:none;
+color:#222;
+margin-left:15px;
+font-weight:500;
+}
+
+nav{
+background:#0b8f4d;
+padding:14px 5%;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+margin-right:20px;
+font-weight:500;
+}
+
+.container{
+padding:40px 5%;
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:30px;
+}
+
+.checkout-box,
+.summary{
+background:#fff;
+border-radius:20px;
+padding:30px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.section{
+margin-bottom:35px;
+}
+
+.section h2{
+margin-bottom:20px;
+color:#0b8f4d;
+}
+
+.group{
+margin-bottom:20px;
+}
+
+.group label{
+display:block;
+margin-bottom:8px;
+font-weight:500;
+}
+
+.group input,
+.group textarea,
+.group select{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px;
+}
+
+textarea{
+resize:none;
+}
+
+.summary-row{
+display:flex;
+justify-content:space-between;
+margin:18px 0;
+font-size:16px;
+}
+
+.summary hr{
+margin:20px 0;
+}
+
+.order-item{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #eee;
+}
+
+.payment-card{
+background:#f8fafc;
+padding:18px;
+border-radius:15px;
+margin-top:15px;
+border:1px solid #ddd;
+}
+
+.payment-card h4{
+margin-bottom:10px;
+color:#0b8f4d;
+}
+
+.btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:50px;
+background:#0b8f4d;
+color:#fff;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+margin-top:25px;
+transition:.3s;
+}
+
+.btn:hover{
+background:#09753f;
+}
+
+.secure{
+margin-top:20px;
+font-size:14px;
+color:#666;
+line-height:1.8;
+}
+
+footer{
+background:#111827;
+color:#fff;
+padding:50px 5%;
+margin-top:50px;
+}
+
+footer a{
+color:#fff;
+text-decoration:none;
+}
+
+@media(max-width:900px){
+
+.container{
+grid-template-columns:1fr;
+}
+
+.top{
+flex-direction:column;
+gap:15px;
+}
+
+.search{
+margin:0;
+width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="top">
+
+<div class="logo">
+
+AFRI<span>CART</span>
+
+</div>
+
+<div class="search">
+
+<input
+type="text"
+placeholder="Search products...">
+
+</div>
+
+<div class="links" id="userMenu">
+
+<a href="login.html">Login</a>
+
+<a href="register.html">Register</a>
+
+<a href="cart.html">🛒 Cart <span id="cartCount">(0)</span></a>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="products.html">Products</a>
+
+<a href="cart.html">Shopping Cart</a>
+
+<a href="orders.html">My Orders</a>
+
+<a href="track-order.html">Track Order</a>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="checkout-box">
+
+<h1>Checkout</h1>
+
+<p style="margin-top:10px;margin-bottom:30px;">
+Complete your order securely through AFRICART.
+</p>
+<!-- ================= CUSTOMER INFORMATION ================= -->
+
+<div class="section">
+
+<h2>Customer Information</h2>
+
+<div class="group">
+
+<label>Full Name</label>
+
+<input
+type="text"
+id="fullname"
+placeholder="Enter your full name">
+
+</div>
+
+<div class="group">
+
+<label>Email Address</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email">
+
+</div>
+
+<div class="group">
+
+<label>Phone Number</label>
+
+<input
+type="text"
+id="phone"
+placeholder="+2547XXXXXXXX">
+
+</div>
+
+</div>
+
+<!-- ================= DELIVERY DETAILS ================= -->
+
+<div class="section">
+
+<h2>Delivery Information</h2>
+
+<div class="group">
+
+<label>County</label>
+
+<select id="county">
+
+<option>Nairobi</option>
+
+<option>Mombasa</option>
+
+<option>Kisumu</option>
+
+<option>Nakuru</option>
+
+<option>Eldoret</option>
+
+<option>Machakos</option>
+
+<option>Kiambu</option>
+
+<option>Meru</option>
+
+<option>Nyeri</option>
+
+<option>Kericho</option>
+
+</select>
+
+</div>
+
+<div class="group">
+
+<label>Delivery Address</label>
+
+<textarea
+rows="5"
+id="address"
+placeholder="Enter your delivery address"></textarea>
+
+</div>
+
+<div class="group">
+
+<label>Additional Instructions</label>
+
+<textarea
+rows="4"
+id="notes"
+placeholder="Apartment, landmarks, gate number etc."></textarea>
+
+</div>
+
+</div>
+
+<!-- ================= PAYMENT ================= -->
+
+<div class="section">
+
+<h2>Payment Method</h2>
+
+<div class="payment-card">
+
+<h4>M-Pesa </h4>
+
+<p>
+
+M-Pesa integration will be added later.
+
+For now, clicking <strong>Place Order</strong>
+
+creates the order in the database.
+
+</p>
+
+</div>
+
+<div class="payment-card">
+
+<h4>Card Payments</h4>
+
+<p>
+
+Coming Soon
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= ORDER SUMMARY ================= -->
+
+<div class="summary">
+
+<h2>Order Summary</h2>
+
+<div id="orderItems">
+
+<p>Loading cart...</p>
+
+</div>
+
+<hr>
+
+<div class="summary-row">
+
+<span>Subtotal</span>
+
+<strong id="subtotal">
+
+KSh 0
+
+</strong>
+
+</div>
+
+<div class="summary-row">
+
+<span>Delivery Fee</span>
+
+<strong id="deliveryFee">
+
+KSh 300
+
+</strong>
+
+</div>
+
+<div class="summary-row">
+
+<span>Service Fee</span>
+
+<strong>
+
+KSh 100
+
+</strong>
+
+</div>
+
+<hr>
+
+<div class="summary-row">
+
+<h3>Total</h3>
+
+<h3 id="grandTotal">
+
+KSh 0
+
+</h3>
+
+</div>
+
+<button
+class="btn"
+id="placeOrderBtn">
+
+Place Order
+
+</button>
+
+<div class="secure">
+
+✔ Secure Checkout
+
+<br><br>
+
+Orders are protected by AFRICART.
+
+The administrator will process your order and update the tracking status after confirmation.
+
+</div>
+
+</div>
+
+</div><footer>
+
+<h2>AFRI<span style="color:#ff8c00;">CART</span></h2>
+
+<p style="margin-top:15px;">
+Connecting customers with trusted African vendors.
+</p>
+
+<p style="margin-top:20px;">
+
+<a href="index.html">Home</a> |
+
+<a href="products.html">Products</a> |
+
+<a href="cart.html">Cart</a>
+
+</p>
+
+</footer>
+
+<script src="js/site-header.js"></script>
+<script>
+
+const API="http://localhost:5000/api";
+
+const token=localStorage.getItem("token");
+
+let subtotal=0;
+
+const DELIVERY_FEE=300;
+
+const SERVICE_FEE=100;
+
+// =====================================
+// Load Cart
+// =====================================
+
+async function loadCart(){
+
+if(!token){
+
+alert("Please login first.");
+
+window.location="login.html";
+
+return;
+
+}
+
+try{
+
+const res=await fetch(`${API}/cart`,{
+
+headers:{
+
+Authorization:`Bearer ${token}`
+
+}
+
+});
+
+const data=await res.json();
+
+if(!data.success){
+
+alert(data.message);
+
+return;
+
+}
+
+const orderItems=document.getElementById("orderItems");
+
+orderItems.innerHTML="";
+
+subtotal=0;
+
+data.cart.forEach(item=>{
+
+subtotal+=Number(item.subtotal);
+
+orderItems.innerHTML+=`
+
+<div class="order-item">
+
+<div>
+
+<strong>${item.name}</strong>
+
+<br>
+
+Qty: ${item.quantity}
+
+</div>
+
+<div>
+
+KSh ${Number(item.subtotal).toLocaleString()}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("subtotal").innerHTML=
+
+"KSh "+subtotal.toLocaleString();
+
+document.getElementById("grandTotal").innerHTML=
+
+"KSh "+(subtotal+DELIVERY_FEE+SERVICE_FEE).toLocaleString();
+
+}
+
+catch(err){
+
+console.log(err);
+
+alert("Unable to load cart.");
+
+}
+
+}
+
+// =====================================
+// Load Logged-in User
+// =====================================
+
+async function loadProfile(){
+
+try{
+
+const res=await fetch(`${API}/users/profile`,{
+
+headers:{
+
+Authorization:`Bearer ${token}`
+
+}
+
+});
+
+const data=await res.json();
+
+if(data.success){
+
+document.getElementById("fullname").value=data.user.fullname||"";
+
+document.getElementById("email").value=data.user.email||"";
+
+document.getElementById("phone").value=data.user.phone||"";
+
+}
+
+}catch(err){
+
+console.log(err);
+
+}
+
+}
+
+// =====================================
+// Place Order
+// =====================================
+
+document.getElementById("placeOrderBtn")
+
+.addEventListener("click",async()=>{
+
+const delivery_location=
+
+document.getElementById("county").value+
+
+" - "+
+
+document.getElementById("address").value;
+
+const phone=
+
+document.getElementById("phone").value;
+
+if(phone.trim()===""){
+
+alert("Enter your phone number.");
+
+return;
+
+}
+
+try{
+
+const res=await fetch(`${API}/orders/checkout`,{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json",
+
+Authorization:`Bearer ${token}`
+
+},
+
+body:JSON.stringify({
+
+delivery_location,
+
+phone,
+
+delivery_fee:DELIVERY_FEE
+
+})
+
+});
+
+const data=await res.json();
+
+if(data.success){
+
+alert("Order placed successfully!");
+
+window.location.href="orders.html";
+
+}else{
+
+alert(data.message);
+
+}
+
+}catch(err){
+
+console.log(err);
+
+alert("Checkout failed.");
+
+}
+
+});
+
+// =====================================
+
+loadCart();
+
+loadProfile();
+
+</script>
+
+</body>
+
+</html>

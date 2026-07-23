@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFRICART | Product Details</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#222;
+}
+
+header{
+background:#fff;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 5%;
+gap:20px;
+}
+
+.logo{
+font-size:2rem;
+font-weight:700;
+color:#0b8f4d;
+}
+
+.logo span{
+color:#ff8c00;
+}
+
+.search{
+flex:1;
+}
+
+.search input{
+width:100%;
+padding:14px 18px;
+border:1px solid #ddd;
+border-radius:40px;
+font-size:15px;
+}
+
+.links a{
+text-decoration:none;
+color:#222;
+margin-left:18px;
+font-weight:500;
+}
+
+nav{
+background:#0b8f4d;
+padding:14px 5%;
+}
+
+nav a{
+text-decoration:none;
+color:#fff;
+margin-right:20px;
+font-weight:500;
+}
+
+.container{
+padding:40px 5%;
+}
+
+.product-box{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+background:#fff;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.gallery{
+position:relative;
+}
+
+.main-image{
+position:relative;
+overflow:hidden;
+border-radius:15px;
+background:#f0f0f0;
+}
+
+.main-image img{
+width:100%;
+height:550px;
+object-fit:cover;
+cursor:pointer;
+transition:.3s;
+display:block;
+}
+
+.main-image img:hover{
+transform:scale(1.03);
+}
+
+.badge{
+display:inline-block;
+background:#0b8f4d;
+color:#fff;
+padding:6px 14px;
+border-radius:30px;
+font-size:14px;
+margin-bottom:15px;
+}
+
+.category-badge{
+display:inline-block;
+background:#e8fff2;
+color:#0b8f4d;
+padding:6px 14px;
+border-radius:30px;
+font-size:13px;
+margin-bottom:15px;
+margin-left:10px;
+}
+
+.price{
+font-size:2rem;
+font-weight:700;
+color:#0b8f4d;
+margin:15px 0;
+}
+
+.stock{
+margin:15px 0;
+font-weight:600;
+}
+
+.stock.in{
+color:#28a745;
+}
+
+.stock.low{
+color:#e08c00;
+}
+
+.stock.out{
+color:#e53935;
+}
+
+.qty{
+margin:20px 0;
+}
+
+.qty input{
+width:90px;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+}
+
+.buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-top:25px;
+}
+
+.btn{
+padding:15px 28px;
+border:none;
+border-radius:40px;
+text-decoration:none;
+font-weight:600;
+color:#fff;
+transition:.3s;
+cursor:pointer;
+font-size:15px;
+}
+
+.cart-btn{
+background:#ff8c00;
+}
+
+.buy-btn{
+background:#0b8f4d;
+}
+
+.btn:disabled{
+background:#ccc;
+cursor:not-allowed;
+}
+
+.lightbox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.9);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
+}
+
+.close-lightbox{
+position:absolute;
+top:25px;
+right:35px;
+font-size:45px;
+color:#fff;
+cursor:pointer;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+}
+
+.card{
+background:#fff;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card .info{
+padding:15px;
+}
+
+@media(max-width:900px){
+
+.product-box{
+grid-template-columns:1fr;
+}
+
+.top{
+flex-direction:column;
+}
+
+.search{
+width:100%;
+}
+
+.main-image img{
+height:350px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="top">
+
+<div class="logo">
+AFRI<span>CART</span>
+</div>
+
+<div class="search">
+<input type="text" placeholder="Search products...">
+</div>
+
+<div class="links" id="userMenu">
+<a href="login.html">Login</a>
+<a href="register.html">Register</a>
+<a href="cart.html">🛒 Cart <span id="cartCount">(0)</span></a>
+</div>
+
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="products.html">Products</a>
+<a href="cart.html">Cart</a>
+<a href="orders.html">My Orders</a>
+<a href="track-order.html">Track Order</a>
+</nav>
+
+</header>
+
+<div class="container">
+
+<div id="productContent">
+<p style="padding:40px;text-align:center;">Loading product...</p>
+</div>
+
+<!-- ==========================
+RELATED PRODUCTS
+========================== -->
+
+<div style="margin-top:35px;" id="relatedSection">
+
+<h2 style="margin-bottom:20px;">Related Products</h2>
+
+<div class="grid" id="relatedProducts"></div>
+
+</div>
+
+<!-- ==========================
+LIGHTBOX
+========================== -->
+
+<div class="lightbox" id="lightbox">
+<span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+<img id="lightboxImage">
+</div>
+
+</div>
+
+<footer style="margin-top:60px;background:#111827;color:#fff;padding:50px 5%;">
+
+<h2>AFRI<span style="color:#ff8c00;">CART</span></h2>
+
+<p style="margin-top:15px;">Connecting customers with trusted African vendors.</p>
+
+<p style="margin-top:20px;">
+<a href="index.html" style="color:#fff;">Home</a> |
+<a href="products.html" style="color:#fff;">Products</a> |
+<a href="cart.html" style="color:#fff;">Cart</a> |
+<a href="orders.html" style="color:#fff;">Orders</a>
+</p>
+
+</footer>
+
+<script src="js/site-header.js"></script>
+<script>
+
+const API = "http://localhost:5000/api";
+
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get("id");
+
+let currentProduct = null;
+
+// ======================================================
+// LOAD PRODUCT
+// ======================================================
+
+async function loadProduct(){
+
+    const content = document.getElementById("productContent");
+
+    if(!productId){
+        content.innerHTML = "<p style='padding:40px;text-align:center;'>No product specified.</p>";
+        document.getElementById("relatedSection").style.display = "none";
+        return;
+    }
+
+    try{
+
+        const res = await fetch(`${API}/products/${productId}`);
+        const data = await res.json();
+
+        if(!data.success){
+            content.innerHTML = `<p style="padding:40px;text-align:center;">Product not found.</p>`;
+            document.getElementById("relatedSection").style.display = "none";
+            return;
+        }
+
+        currentProduct = data.product;
+        renderProduct(currentProduct);
+        loadRelated(currentProduct);
+
+    }catch(err){
+
+        console.log(err);
+        content.innerHTML = `<p style="padding:40px;text-align:center;">Unable to connect to the server. Please make sure the backend is running.</p>`;
+        document.getElementById("relatedSection").style.display = "none";
+
+    }
+
+}
+
+// ======================================================
+// RENDER PRODUCT
+// ======================================================
+
+function renderProduct(product){
+
+    const image = product.image
+        ? `http://localhost:5000/uploads/products/${product.image}`
+        : "https://via.placeholder.com/800x800?text=No+Image";
+
+    const stock = Number(product.stock);
+
+    let stockClass = "in";
+    let stockText = `✔ In Stock (${stock} left)`;
+
+    if(stock <= 0){
+        stockClass = "out";
+        stockText = "✘ Out of Stock";
+    }else if(stock < 5){
+        stockClass = "low";
+        stockText = `⚠ Low Stock (${stock} left)`;
+    }
+
+    document.getElementById("productContent").innerHTML = `
+
+    <div class="product-box">
+
+        <div class="gallery">
+            <div class="main-image">
+                <img id="mainImage" src="${image}" alt="${product.name}" onclick="openLightbox()">
+            </div>
+        </div>
+
+        <div class="details">
+
+            <span class="badge">✔ Verified Vendor</span>
+            <span class="category-badge">${product.category || "General"}</span>
+
+            <h1>${product.name}</h1>
+
+            <div class="price">KSh ${Number(product.price).toLocaleString()}</div>
+
+            <div class="stock ${stockClass}">${stockText}</div>
+
+            <p style="line-height:1.9;margin-top:20px;">
+                ${product.description || "No description provided by the vendor."}
+            </p>
+
+            <div class="qty">
+                <label><b>Quantity</b></label><br><br>
+                <input id="qty" type="number" value="1" min="1" max="${Math.max(stock,1)}" ${stock<=0 ? "disabled" : ""}>
+            </div>
+
+            <div class="buttons">
+                <button class="btn cart-btn" onclick="handleAddToCart()" ${stock<=0 ? "disabled" : ""}>
+                    🛒 Add to Cart
+                </button>
+                <button class="btn buy-btn" onclick="handleBuyNow()" ${stock<=0 ? "disabled" : ""}>
+                    ⚡ Buy Now
+                </button>
+            </div>
+
+            <div style="margin-top:35px;padding:20px;background:#f8f8f8;border-radius:15px;">
+                <h3>Delivery Information</h3>
+                <br>
+                <p>🚚 Estimated Delivery: <b>2 - 4 Days</b></p>
+                <p>📍 Ships From: <b>Nairobi Warehouse</b></p>
+                <p>🔒 Secure Payment</p>
+                <p>↩ 7 Days Easy Returns</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================
+    VENDOR INFORMATION
+    ========================== -->
+
+    <div style="margin-top:35px;background:#fff;padding:30px;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.08);">
+        <h2>Vendor Information</h2>
+        <br>
+        <p>🏪 <b>Shop:</b> ${product.vendor || "AFRICART Vendor"}</p>
+        <p>✔ Verified Vendor</p>
+        <br>
+        <a href="products.html" class="btn buy-btn">View Vendor Store</a>
+    </div>
+
+    `;
+
+}
+
+// ======================================================
+// LIGHTBOX
+// ======================================================
+
+function openLightbox(){
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightboxImage").src = document.getElementById("mainImage").src;
+}
+
+function closeLightbox(){
+    document.getElementById("lightbox").style.display = "none";
+}
+
+document.addEventListener("keydown", e=>{
+    if(e.key === "Escape") closeLightbox();
+});
+
+// ======================================================
+// CART ACTIONS
+// (addToCart itself is provided by js/site-header.js)
+// ======================================================
+
+function handleAddToCart(){
+    const qty = Number(document.getElementById("qty").value) || 1;
+    addToCart(currentProduct.id, qty);
+}
+
+async function handleBuyNow(){
+
+    const token = localStorage.getItem("token");
+
+    if(!token){
+        alert("Please login to continue.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    const qty = Number(document.getElementById("qty").value) || 1;
+
+    try{
+
+        const res = await fetch(`${API}/cart`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                product_id: currentProduct.id,
+                quantity: qty
+            })
+        });
+
+        const data = await res.json();
+
+        if(data.success){
+            window.location.href = "checkout.html";
+        }else{
+            alert(data.message || "Could not process this product.");
+        }
+
+    }catch(err){
+        console.log(err);
+        alert("Something went wrong. Please try again.");
+    }
+
+}
+
+// ======================================================
+// RELATED PRODUCTS (real data, same category)
+// ======================================================
+
+async function loadRelated(product){
+
+    const related = document.getElementById("relatedProducts");
+
+    if(!product.category){
+        document.getElementById("relatedSection").style.display = "none";
+        return;
+    }
+
+    try{
+
+        const res = await fetch(`${API}/products/category/${encodeURIComponent(product.category)}`);
+        const data = await res.json();
+
+        if(!data.success){
+            document.getElementById("relatedSection").style.display = "none";
+            return;
+        }
+
+        const others = data.products.filter(p => p.id !== product.id).slice(0, 4);
+
+        if(others.length === 0){
+            document.getElementById("relatedSection").style.display = "none";
+            return;
+        }
+
+        related.innerHTML = "";
+
+        others.forEach(p => {
+
+            const image = p.image
+                ? `http://localhost:5000/uploads/products/${p.image}`
+                : "https://via.placeholder.com/400x300?text=No+Image";
+
+            related.innerHTML += `
+                <div class="card">
+                    <img src="${image}">
+                    <div class="info">
+                        <h3>${p.name}</h3>
+                        <p style="margin:10px 0;font-weight:bold;color:#0b8f4d;">
+                            KSh ${Number(p.price).toLocaleString()}
+                        </p>
+                        <a href="product-details.html?id=${p.id}" class="btn buy-btn">View Product</a>
+                    </div>
+                </div>
+            `;
+
+        });
+
+    }catch(err){
+        console.log(err);
+        document.getElementById("relatedSection").style.display = "none";
+    }
+
+}
+
+loadProduct();
+
+</script>
+
+</body>
+
+</html>

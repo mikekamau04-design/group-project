@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Products</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+<h2>AFRICART</h2>
+
+<span>ADMIN PANEL</span>
+
+</div>
+
+<ul>
+
+<li><a href="admin.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+
+<li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+
+<li><a href="vendors.html"><i class="fas fa-store"></i> Vendors</a></li>
+
+<li class="active"><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+
+<li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+
+<li><a href="withdrawals.html"><i class="fas fa-money-bill-wave"></i> Withdrawals</a></li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>Products</h1>
+
+</div>
+
+<div class="recent">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Image</th>
+
+<th>Name</th>
+
+<th>Vendor</th>
+
+<th>Category</th>
+
+<th>Price</th>
+
+<th>Stock</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="productsTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const API="http://localhost:5000/api";
+
+const token=localStorage.getItem("token");
+
+if(!token){window.location.href="../login.html";}
+
+const headers={
+
+Authorization:`Bearer ${token}`
+
+};
+
+async function loadProducts(){
+
+const res=await fetch(
+
+`${API}/admin/products`,
+
+{
+
+headers
+
+}
+
+);
+
+const data=await res.json();
+
+const table=document.getElementById("productsTable");
+
+table.innerHTML="";
+
+data.products.forEach(product=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>
+
+<img
+
+src="http://localhost:5000/uploads/products/${product.image}"
+
+width="60"
+
+height="60"
+
+style="border-radius:8px;object-fit:cover;">
+
+</td>
+
+<td>${product.name}</td>
+
+<td>${product.vendor}</td>
+
+<td>${product.category}</td>
+
+<td>KSh ${Number(product.price).toLocaleString()}</td>
+
+<td>${product.stock}</td>
+
+<td>${(product.status||"Active").toLowerCase()==="active" ? '<span style="color:#2ecc71;font-weight:600;">Active</span>' : '<span style="color:#e74c3c;font-weight:600;">Inactive</span>'}</td>
+
+<td>
+
+<button
+
+class="${(product.status||"Active").toLowerCase()==="active" ? "btn-secondary" : "btn-success"}"
+
+onclick="toggleProductStatus(${product.id})">
+
+${(product.status||"Active").toLowerCase()==="active" ? "Deactivate" : "Activate"}
+
+</button>
+
+<button
+
+class="btn-danger"
+
+onclick="deleteProduct(${product.id})">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+async function deleteProduct(id){
+
+if(!confirm("Delete this product?")) return;
+
+const res=await fetch(
+
+`${API}/admin/products/${id}`,
+
+{
+
+method:"DELETE",
+
+headers
+
+}
+
+);
+
+const data=await res.json();
+
+alert(data.message||(data.success ? "Product deleted." : "Something went wrong."));
+
+loadProducts();
+
+}
+
+async function toggleProductStatus(id){
+
+const res=await fetch(
+
+`${API}/admin/products/${id}/status`,
+
+{
+
+method:"PATCH",
+
+headers
+
+}
+
+);
+
+const data=await res.json();
+
+if(!data.success){
+
+alert(data.message||"Something went wrong.");
+
+}
+
+loadProducts();
+
+}
+
+loadProducts();
+
+</script>
+
+</body>
+
+</html>

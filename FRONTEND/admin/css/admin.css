@@ -1,0 +1,322 @@
+/* ======================================================
+   AFRICART ADMIN PANEL
+   Restyled to match the main AFRICART site theme
+   (same palette/typography as vendor-dashboard.html)
+====================================================== */
+
+:root{
+    --green:#0b8f4d;
+    --green-dark:#087a41;
+    --orange:#ff9800;
+    --danger:#e53935;
+    --danger-dark:#c62828;
+
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --border:#e6ebf0;
+
+    --text:#1d2935;
+    --muted:#70808d;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+    display:flex;
+    min-height:100vh;
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+.sidebar{
+    width:260px;
+    min-height:100vh;
+    background:var(--green);
+    color:#fff;
+    position:fixed;
+    left:0;
+    top:0;
+    padding-bottom:20px;
+    overflow-y:auto;
+}
+
+.logo{
+    padding:30px 25px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo h2{
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+.logo span{
+    display:block;
+    font-size:12px;
+    letter-spacing:2px;
+    opacity:.85;
+    margin-top:4px;
+    color:var(--orange);
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:20px 14px;
+}
+
+.sidebar li{
+    margin-bottom:8px;
+}
+
+.sidebar a{
+    color:#fff;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    border-radius:10px;
+    font-size:14.5px;
+    transition:.25s;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.sidebar li.active a,
+.sidebar a.active{
+    background:#fff;
+    color:var(--green);
+    font-weight:600;
+}
+
+.sidebar i{
+    width:20px;
+    text-align:center;
+}
+
+/* ==========================
+   MAIN
+========================== */
+
+.main{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:32px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.topbar h1{
+    font-size:28px;
+    font-weight:700;
+    color:var(--text);
+}
+
+.admin-name{
+    font-weight:600;
+}
+
+/* ==========================
+   CARDS
+========================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 4px 14px rgba(17,24,39,.05);
+}
+
+.card h3{
+    color:var(--muted);
+    margin-bottom:14px;
+    font-size:14px;
+    font-weight:500;
+}
+
+.card h1{
+    color:var(--green);
+    font-size:32px;
+    font-weight:700;
+}
+
+/* ==========================
+   TABLES / PANELS
+========================== */
+
+.recent{
+    background:var(--card);
+    padding:26px;
+    border-radius:16px;
+    border:1px solid var(--border);
+    box-shadow:0 4px 14px rgba(17,24,39,.05);
+    overflow-x:auto;
+}
+
+.recent h2{
+    margin-bottom:20px;
+    font-size:19px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+th{
+    background:var(--green);
+    color:#fff;
+    padding:14px;
+    text-align:left;
+    font-size:13px;
+    font-weight:600;
+}
+
+th:first-child{ border-top-left-radius:10px; }
+th:last-child{ border-top-right-radius:10px; }
+
+td{
+    padding:14px;
+    border-bottom:1px solid var(--border);
+    font-size:14px;
+}
+
+tr:hover td{
+    background:#f8faf9;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+button{
+    border:none;
+    border-radius:8px;
+    padding:9px 18px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:13.5px;
+    font-family:"Poppins",sans-serif;
+    transition:.2s;
+}
+
+.btn-success{
+    background:var(--green);
+    color:#fff;
+}
+.btn-success:hover{ background:var(--green-dark); }
+
+.btn-danger{
+    background:var(--danger);
+    color:#fff;
+}
+.btn-danger:hover{ background:var(--danger-dark); }
+
+.btn-secondary{
+    background:#8a94a6;
+    color:#fff;
+}
+.btn-secondary:hover{ background:#6f7889; }
+
+.btn-primary{
+    background:var(--orange);
+    color:#fff;
+}
+.btn-primary:hover{ background:#e68900; }
+
+/* ==========================
+   FORMS
+========================== */
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin-top:8px;
+    margin-bottom:18px;
+    font-family:"Poppins",sans-serif;
+    font-size:14px;
+}
+
+label{
+    font-weight:600;
+}
+
+/* ==========================
+   STATUS BADGES (used inline via classes if needed)
+========================== */
+
+.badge{
+    padding:6px 12px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
+}
+.badge.pending{ background:#fff3e0; color:#ef6c00; }
+.badge.paid,
+.badge.delivered,
+.badge.approved{ background:#e8f5e9; color:#2e7d32; }
+.badge.failed,
+.badge.rejected,
+.badge.cancelled{ background:#fdecea; color:var(--danger); }
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:70px;
+    }
+
+    .sidebar .logo span,
+    .sidebar a span,
+    .sidebar a{
+        font-size:0;
+    }
+
+    .sidebar i{
+        font-size:18px;
+    }
+
+    .main{
+        margin-left:70px;
+        width:calc(100% - 70px);
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Withdrawals</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+<h2>AFRICART</h2>
+
+<span>ADMIN PANEL</span>
+
+</div>
+
+<ul>
+
+<li><a href="admin.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+
+<li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+
+<li><a href="vendors.html"><i class="fas fa-store"></i> Vendors</a></li>
+
+<li><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+
+<li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+
+<li class="active"><a href="withdrawals.html"><i class="fas fa-money-bill-wave"></i> Withdrawals</a></li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>Vendor Withdrawals</h1>
+
+<button id="exportBtn" class="btn-success" style="margin-left:auto">Export PDF</button>
+
+</div>
+
+<div class="recent">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Vendor</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Requested</th>
+
+<th>Transaction Code</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="withdrawalsTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+<script>
+
+const API="http://localhost:5000/api";
+
+const token=localStorage.getItem("token");
+
+if(!token){window.location.href="../login.html";}
+
+const headers={
+
+"Content-Type":"application/json",
+
+Authorization:`Bearer ${token}`
+
+};
+
+let latestWithdrawals=[];
+
+async function loadWithdrawals(){
+
+const res=await fetch(
+
+`${API}/withdrawals/admin`,
+
+{
+
+headers
+
+}
+
+);
+
+const data=await res.json();
+
+latestWithdrawals=data.withdrawals||[];
+
+const table=document.getElementById("withdrawalsTable");
+
+table.innerHTML="";
+
+latestWithdrawals.forEach(w=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${w.id}</td>
+
+<td>${w.fullname||"Vendor #"+w.vendor_id}<br><small style="color:#888">${w.email||""}</small></td>
+
+<td>KSh ${Number(w.amount).toLocaleString()}</td>
+
+<td>${w.status}</td>
+
+<td>${new Date(w.requested_at).toLocaleDateString()}</td>
+
+<td>${w.transaction_code||""}</td>
+
+<td>
+
+${w.status==="pending" ? `
+
+<button
+
+class="btn-success"
+
+onclick="approve(${w.id})">
+
+Approve
+
+</button>
+
+<button
+
+class="btn-danger"
+
+onclick="reject(${w.id})">
+
+Reject
+
+</button>
+
+` : ""}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+async function approve(id){
+
+const code=prompt("Enter MPESA Transaction Code (leave blank to auto-generate)");
+
+if(code==null)return;
+
+await fetch(
+
+`${API}/withdrawals/approve/${id}`,
+
+{
+
+method:"PUT",
+
+headers,
+
+body:JSON.stringify({
+
+transaction_code:code
+
+})
+
+}
+
+);
+
+loadWithdrawals();
+
+}
+
+async function reject(id){
+
+const notes=prompt("Reason for rejection (optional)");
+
+await fetch(
+
+`${API}/withdrawals/reject/${id}`,
+
+{
+
+method:"PUT",
+
+headers,
+
+body:JSON.stringify({ notes })
+
+}
+
+);
+
+loadWithdrawals();
+
+}
+
+/* ======================================================
+EXPORT PDF
+====================================================== */
+
+function exportPDF(){
+
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF();
+
+doc.setFillColor(11,143,77);
+doc.rect(0,0,210,28,"F");
+
+doc.setTextColor(255,255,255);
+doc.setFontSize(20);
+doc.text("AFRICART",14,14);
+
+doc.setFontSize(11);
+doc.text("Vendor Withdrawals Report",14,22);
+
+doc.setTextColor(90,90,90);
+doc.setFontSize(9);
+doc.text("Generated: "+new Date().toLocaleString(),150,35);
+
+const rows = latestWithdrawals.map(w => [
+    w.id,
+    (w.fullname||"Vendor #"+w.vendor_id) + (w.email ? "\n"+w.email : ""),
+    "KSh "+Number(w.amount).toLocaleString(),
+    w.status,
+    new Date(w.requested_at).toLocaleDateString(),
+    w.transaction_code||"-"
+]);
+
+doc.autoTable({
+    startY: 38,
+    head: [["ID","Vendor","Amount","Status","Requested","Transaction Code"]],
+    body: rows,
+    headStyles: { fillColor: [11,143,77] },
+    alternateRowStyles: { fillColor: [245,248,246] },
+    styles: { fontSize: 9, cellPadding: 4 }
+});
+
+doc.save("africart-withdrawals.pdf");
+
+}
+
+document.getElementById("exportBtn").onclick = exportPDF;
+
+loadWithdrawals();
+
+</script>
+
+</body>
+
+</html>

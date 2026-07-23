@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Register</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#0b8f4d,#ff8c00);
+padding:30px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+background:#fff;
+border-radius:25px;
+overflow:hidden;
+display:grid;
+grid-template-columns:1fr 1.2fr;
+box-shadow:0 20px 40px rgba(0,0,0,.2);
+}
+
+.left{
+background:url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4?w=1200') center/cover;
+position:relative;
+color:#fff;
+padding:60px;
+}
+
+.left::before{
+content:'';
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.55);
+}
+
+.left-content{
+position:relative;
+z-index:2;
+}
+
+.left h1{
+font-size:3rem;
+margin-bottom:20px;
+}
+
+.right{
+padding:50px;
+}
+
+.logo{
+font-size:2rem;
+font-weight:700;
+color:#0b8f4d;
+}
+
+.logo span{
+color:#ff8c00;
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:500;
+}
+
+input,
+select,
+textarea{
+
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px;
+
+}
+
+.btn{
+
+width:100%;
+padding:16px;
+border:none;
+border-radius:50px;
+background:#0b8f4d;
+color:white;
+font-size:1rem;
+cursor:pointer;
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#06763e;
+
+}
+
+.links{
+
+text-align:center;
+margin-top:20px;
+
+}
+
+.links a{
+
+text-decoration:none;
+color:#0b8f4d;
+
+}
+
+#message{
+
+margin-top:15px;
+text-align:center;
+font-weight:bold;
+
+}
+
+@media(max-width:900px){
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+.left{
+
+display:none;
+
+}
+
+.row{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="left">
+
+<div class="left-content">
+
+<h1>Join AFRICART</h1>
+
+<p>
+
+Create an account to shop,
+
+sell products,
+
+and manage orders across Africa.
+
+</p>
+
+<br>
+
+<h3>Why Join?</h3>
+
+<ul style="line-height:2;margin-left:20px">
+
+<li>Buy from verified vendors</li>
+
+<li>Sell products as a vendor</li>
+
+<li>Track deliveries in real time</li>
+
+<li>Secure payments and withdrawals</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="logo">
+
+AFRI<span>CART</span>
+
+</div>
+
+<h2 style="margin:15px 0">
+
+Create Your Account
+
+</h2>
+
+<form id="registerForm">
+
+<div class="row">
+
+<div class="group">
+
+<label>First Name</label>
+
+<input
+type="text"
+id="firstName"
+placeholder="First name"
+required>
+
+</div>
+
+<div class="group">
+
+<label>Last Name</label>
+
+<input
+type="text"
+id="lastName"
+placeholder="Last name"
+required>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="group">
+
+<label>Email Address</label>
+
+<input
+type="email"
+id="email"
+placeholder="Email address"
+required>
+
+</div>
+
+<div class="group">
+
+<label>Phone Number</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="+2547XXXXXXXX"
+required>
+
+</div>
+
+</div>
+
+<div class="group">
+
+<label>Account Type</label>
+
+<select id="accountType">
+
+<option value="customer">Customer</option>
+
+<option value="vendor">Vendor</option>
+
+</select>
+
+</div>
+
+<div class="group">
+
+<label>Shop Name (For Vendors)</label>
+
+<input
+type="text"
+id="shopName"
+placeholder="Enter shop name">
+
+</div>
+
+<div class="group">
+
+<label>County / Location</label>
+
+<select id="county">
+
+<option>Nairobi</option>
+<option>Mombasa</option>
+<option>Kisumu</option>
+<option>Nakuru</option>
+<option>Eldoret</option>
+
+</select>
+
+</div>
+
+<div class="group">
+
+<label>Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Create password"
+required>
+
+</div>
+
+<div class="group">
+
+<label>Confirm Password</label>
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm password"
+required>
+
+</div>
+
+<div class="group">
+
+<label>Address</label>
+
+<textarea
+rows="4"
+id="address"
+placeholder="Enter your address"></textarea>
+
+</div>
+
+<div class="group">
+
+<label>
+
+<input
+type="checkbox"
+id="terms"
+required>
+
+I agree to the Terms and Conditions
+
+</label>
+
+</div>
+
+<button
+type="submit"
+class="btn">
+
+Create Account
+
+</button>
+
+<p id="message"></p>
+
+</form>
+
+<form id="verifyForm" style="display:none">
+
+<p style="margin-bottom:15px;color:#555">
+
+Enter the 4-digit code we sent to your email.
+
+</p>
+
+<div class="group">
+
+<label>Verification Code</label>
+
+<input
+type="text"
+id="verifyCode"
+maxlength="4"
+inputmode="numeric"
+placeholder="0000"
+style="letter-spacing:10px;font-size:1.4rem;text-align:center"
+required>
+
+</div>
+
+<button
+type="submit"
+class="btn">
+
+Verify Email
+
+</button>
+
+<p id="verifyMessage" style="margin-top:15px;text-align:center;font-weight:bold"></p>
+
+<p style="text-align:center;margin-top:15px">
+
+<a href="#" id="resendLink" style="color:#0b8f4d;text-decoration:none">
+
+Resend code
+
+</a>
+
+</p>
+
+</form>
+
+<div class="links">
+
+<p>
+
+Already have an account?
+
+<a href="login.html">
+
+Login Here
+
+</a>
+
+</p>
+
+<br>
+
+<a href="index.html">
+
+← Back to Home
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="js/api.js"></script>
+
+<script src="js/register.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Africa's Marketplace</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#f5f6fa;
+color:#222;
+}
+
+a{
+text-decoration:none;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+header{
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+
+background:#ffffff;
+
+box-shadow:0 3px 15px rgba(0,0,0,.08);
+
+}
+
+.top-nav{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:18px 6%;
+
+gap:25px;
+
+}
+
+.logo{
+
+font-size:2rem;
+
+font-weight:700;
+
+color:#0b8f4d;
+
+}
+
+.logo span{
+
+color:#ff8c00;
+
+}
+
+.search-box{
+
+flex:1;
+
+position:relative;
+
+}
+
+.search-box input{
+
+width:100%;
+
+padding:14px 20px;
+
+border-radius:40px;
+
+border:1px solid #ddd;
+
+font-size:15px;
+
+transition:.3s;
+
+}
+
+.search-box input:focus{
+
+outline:none;
+
+border:2px solid #0b8f4d;
+
+box-shadow:0 0 10px rgba(11,143,77,.2);
+
+}
+
+.actions{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+font-weight:600;
+
+}
+
+.actions a{
+
+color:#222;
+
+transition:.3s;
+
+}
+
+.actions a:hover{
+
+color:#0b8f4d;
+
+}
+
+.menu{
+
+display:flex;
+
+gap:25px;
+
+padding:15px 6%;
+
+background:#0b8f4d;
+
+overflow-x:auto;
+
+}
+
+.menu::-webkit-scrollbar{
+
+display:none;
+
+}
+
+.menu li{
+
+list-style:none;
+
+white-space:nowrap;
+
+}
+
+.menu a{
+
+color:white;
+
+font-size:15px;
+
+font-weight:500;
+
+transition:.3s;
+
+}
+
+.menu a:hover{
+
+color:#ffd166;
+
+}
+
+.hero{
+
+min-height:80vh;
+
+display:flex;
+
+align-items:center;
+
+padding:0 6%;
+
+background:
+
+linear-gradient(
+
+rgba(0,0,0,.45),
+
+rgba(0,0,0,.45)
+
+),
+
+url("https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1600")
+
+center/cover;
+
+}
+
+.hero-content{
+
+max-width:650px;
+
+color:white;
+
+}
+
+.hero-content h1{
+
+font-size:3.6rem;
+
+line-height:1.2;
+
+margin-bottom:20px;
+
+}
+
+.hero-content p{
+
+font-size:18px;
+
+line-height:1.8;
+
+margin-bottom:30px;
+
+}
+
+.btn{
+
+display:inline-block;
+
+padding:15px 35px;
+
+background:#ff8c00;
+
+color:white;
+
+border-radius:40px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#e67e00;
+
+transform:translateY(-2px);
+
+}
+
+.section{
+
+padding:70px 6%;
+
+}
+
+.title{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:35px;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.badge{
+
+display:inline-block;
+
+background:#0b8f4d;
+
+color:white;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:12px;
+
+}
+
+.info{
+
+padding:18px;
+
+}
+
+@media(max-width:900px){
+
+.top-nav{
+
+flex-direction:column;
+
+}
+
+.search-box{
+
+width:100%;
+
+}
+
+.hero-content h1{
+
+font-size:2.3rem;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="top-nav">
+
+<div class="logo">
+
+AFRI<span>CART</span>
+
+</div>
+
+<div class="search-box">
+
+<input
+
+id="searchInput"
+
+type="text"
+
+placeholder="Search products, vendors, categories...">
+
+</div>
+
+<div class="actions" id="userMenu">
+
+<a href="login.html">Login</a>
+
+<a href="register.html">Register</a>
+
+<a href="cart.html">
+
+🛒 Cart
+
+<span id="cartCount">(0)</span>
+
+</a>
+
+</div>
+
+</div>
+
+<ul class="menu">
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="products.html?category=Electronics">Electronics</a></li>
+
+<li><a href="products.html?category=Phones">Phones</a></li>
+
+<li><a href="products.html?category=Fashion">Fashion</a></li>
+
+<li><a href="products.html?category=Beauty">Beauty</a></li>
+
+<li><a href="products.html?category=Groceries">Groceries</a></li>
+
+<li><a href="products.html?category=Furniture">Furniture</a></li>
+
+<li><a href="products.html?category=Computers">Computers</a></li>
+
+<li><a href="products.html?category=Accessories">Accessories</a></li>
+
+<li><a href="track-order.html">Track Order</a></li>
+
+</ul>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+
+Africa's Biggest Marketplace
+
+</h1>
+
+<p>
+
+Buy from trusted African vendors.
+
+Sell your products.
+
+Track orders.
+
+Secure payments.
+
+Fast delivery.
+
+All in one platform.
+
+</p>
+
+<a href="#products" class="btn">
+
+Start Shopping
+
+</a>
+
+</div>
+
+</section>
+<section class="section" id="products">
+
+<div class="title">
+
+<h2>Featured Products</h2>
+
+<h4>Latest Products From Vendors</h4>
+
+</div>
+
+<div
+class="grid"
+id="productsGrid">
+
+</div>
+
+</section>
+
+<section
+class="section"
+style="background:#ffffff;">
+
+<div class="title">
+
+<h2>
+
+Why Shop With AFRICART?
+
+</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="info">
+
+<h2>🚚</h2>
+
+<h3>Fast Delivery</h3>
+
+<p>
+
+Orders are processed quickly and delivered to your location.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="info">
+
+<h2>🔒</h2>
+
+<h3>Secure Payments</h3>
+
+<p>
+
+Safe transactions with protected checkout.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="info">
+
+<h2>⭐</h2>
+
+<h3>Verified Vendors</h3>
+
+<p>
+
+Only approved vendors can sell products.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="info">
+
+<h2>💬</h2>
+
+<h3>24/7 Support</h3>
+
+<p>
+
+Customer support whenever you need help.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="title">
+
+<h2>
+
+Popular Categories
+
+</h2>
+
+</div>
+
+<div
+class="grid"
+id="categoriesGrid">
+
+</div>
+
+</section>
+
+<section
+class="section"
+style="background:#fff;">
+
+<div class="title">
+
+<h2>
+
+Become A Vendor
+
+</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="info">
+
+<h2>1️⃣ Register</h2>
+
+<p>
+
+Create a vendor account.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="info">
+
+<h2>2️⃣ Approval</h2>
+
+<p>
+
+Administrator verifies your shop.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="info">
+
+<h2>3️⃣ Upload Products</h2>
+
+<p>
+
+Sell unlimited products.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="info">
+
+<h2>4️⃣ Receive Orders</h2>
+
+<p>
+
+Manage customer orders easily.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div
+style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+padding:60px 6%;
+background:#111827;
+color:white;
+">
+
+<div>
+
+<h2>
+
+AFRICART
+
+</h2>
+
+<br>
+
+<p>
+
+Africa's trusted online marketplace.
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Customer Service
+
+</h3>
+
+<br>
+
+<p>Help Center</p>
+
+<p>Returns</p>
+
+<p>Track Orders</p>
+
+<p>Contact Us</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Sell On AFRICART
+
+</h3>
+
+<br>
+
+<p>Become Vendor</p>
+
+<p>Vendor Dashboard</p>
+
+<p>Vendor Policies</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Contact
+
+</h3>
+
+<br>
+
+<p>
+
+support@africart.com
+
+</p>
+
+<p>
+
++254 700 000000
+
+</p>
+
+</div>
+
+</div>
+
+<div
+style="
+background:#0d1117;
+color:white;
+text-align:center;
+padding:20px;
+">
+
+© 2026 AFRICART. All Rights Reserved.
+
+</div>
+
+</footer>
+
+<script src="js/site-header.js"></script>
+
+<script>
+    // ================================
+// API URL
+// ================================
+
+const API = "http://localhost:5000/api";
+
+// ================================
+// LOAD PRODUCTS
+// ================================
+
+async function loadProducts(){
+
+    try{
+
+        const response = await fetch(
+
+            API + "/products"
+
+        );
+
+        const data = await response.json();
+
+        if(!data.success){
+
+            return;
+
+        }
+
+        displayProducts(data.products);
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+// ================================
+// DISPLAY PRODUCTS
+// ================================
+
+function displayProducts(products){
+
+    const grid = document.getElementById(
+
+        "productsGrid"
+
+    );
+
+    grid.innerHTML = "";
+
+    products.forEach(product=>{
+
+        const image = product.image
+
+        ? `http://localhost:5000/uploads/products/${product.image}`
+
+        : "https://via.placeholder.com/400x300?text=No+Image";
+
+        grid.innerHTML += `
+
+<div class="card">
+
+<img
+src="${image}"
+style="
+width:100%;
+height:250px;
+object-fit:cover;
+">
+
+<div class="info">
+
+<span class="badge">
+
+${product.category || "General"}
+
+</span>
+
+<h3
+style="
+margin-top:15px;
+">
+
+${product.name}
+
+</h3>
+
+<p>
+
+${product.vendor}
+
+</p>
+
+<h2
+style="
+margin:15px 0;
+color:#0b8f4d;
+">
+
+KSh ${Number(product.price).toLocaleString()}
+
+</h2>
+
+<p>
+
+Stock :
+
+${product.stock}
+
+</p>
+
+<div
+style="
+display:flex;
+gap:10px;
+margin-top:20px;
+">
+
+<button
+class="btn"
+style="
+flex:1;
+padding:12px;
+"
+onclick="addToCart(${product.id})">
+
+Add To Cart
+
+</button>
+
+<button
+class="btn"
+style="
+background:#ff8c00;
+flex:1;
+padding:12px;
+"
+onclick="viewProduct(${product.id})">
+
+View
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+    });
+
+}
+
+// ================================
+// VIEW PRODUCT
+// ================================
+
+function viewProduct(id){
+
+    location.href=
+
+    "product-details.html?id="+id;
+
+}
+
+// ================================
+// SEARCH
+// ================================
+
+document
+
+.getElementById(
+
+"searchInput"
+
+)
+
+.addEventListener(
+
+"keyup",
+
+function(){
+
+const keyword=
+
+this.value.toLowerCase();
+
+const cards=
+
+document.querySelectorAll(
+
+"#productsGrid .card"
+
+);
+
+cards.forEach(card=>{
+
+const text=
+
+card.innerText.toLowerCase();
+
+card.style.display=
+
+text.includes(keyword)
+
+?
+
+"block"
+
+:
+
+"none";
+
+});
+
+}
+
+);
+
+// ================================
+// CATEGORIES
+// ================================
+
+const categories=[
+
+"Electronics",
+
+"Phones",
+
+"Fashion",
+
+"Furniture",
+
+"Beauty",
+
+"Computers",
+
+"Kitchen",
+
+"Sports"
+
+];
+
+const categoryGrid=
+
+document.getElementById(
+
+"categoriesGrid"
+
+);
+
+categories.forEach(cat=>{
+
+categoryGrid.innerHTML+=`
+
+<div class="card">
+
+<img
+
+src="https://via.placeholder.com/500x300?text=${cat}"
+
+style="height:220px;object-fit:cover;">
+
+<div class="info">
+
+<h3>
+
+${cat}
+
+</h3>
+
+<p>
+
+Browse all ${cat} products.
+
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+// ================================
+// CART
+// (addToCart is provided by js/site-header.js
+// and talks to the real backend cart)
+// ================================
+
+loadProducts();
+
+</script>
+
+</body>
+
+</html>

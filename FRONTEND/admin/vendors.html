@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Vendors</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <h2>AFRICART</h2>
+
+        <span>ADMIN PANEL</span>
+
+    </div>
+
+    <ul>
+
+        <li><a href="admin.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+
+        <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+
+        <li class="active"><a href="vendors.html"><i class="fas fa-store"></i> Vendors</a></li>
+
+        <li><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+
+        <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+
+        <li><a href="withdrawals.html"><i class="fas fa-money-bill-wave"></i> Withdrawals</a></li>
+
+    </ul>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>Vendor Management</h1>
+
+</div>
+
+<div class="recent">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Phone</th>
+
+<th>Verified</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="vendorTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const API="http://localhost:5000/api";
+
+const token=localStorage.getItem("token");
+
+if(!token){window.location.href="../login.html";}
+
+const headers={
+
+Authorization:`Bearer ${token}`
+
+};
+
+async function loadVendors(){
+
+const res=await fetch(
+
+`${API}/admin/vendors`,
+
+{
+
+headers
+
+}
+
+);
+
+const data=await res.json();
+
+const table=document.getElementById("vendorTable");
+
+table.innerHTML="";
+
+data.vendors.forEach(v=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${v.id}</td>
+
+<td>${v.fullname}</td>
+
+<td>${v.email}</td>
+
+<td>${v.phone||""}</td>
+
+<td>${v.is_verified?"Yes":"No"}</td>
+
+<td>
+
+<button
+
+class="btn-success"
+
+onclick="approveVendor(${v.id})">
+
+Approve
+
+</button>
+
+<button
+
+class="btn-danger"
+
+onclick="deleteVendor(${v.id})">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+async function approveVendor(id){
+
+await fetch(
+
+`${API}/admin/vendors/${id}/approve`,
+
+{
+
+method:"PUT",
+
+headers
+
+}
+
+);
+
+loadVendors();
+
+}
+
+async function deleteVendor(id){
+
+if(!confirm("Delete Vendor?")) return;
+
+await fetch(
+
+`${API}/admin/vendors/${id}`,
+
+{
+
+method:"DELETE",
+
+headers
+
+}
+
+);
+
+loadVendors();
+
+}
+
+loadVendors();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Orders</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+<h2>AFRICART</h2>
+
+<span>ADMIN PANEL</span>
+
+</div>
+
+<ul>
+
+<li><a href="admin.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+
+<li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+
+<li><a href="vendors.html"><i class="fas fa-store"></i> Vendors</a></li>
+
+<li><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+
+<li class="active"><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+
+<li><a href="withdrawals.html"><i class="fas fa-money-bill-wave"></i> Withdrawals</a></li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>Orders Management</h1>
+
+</div>
+
+<div class="recent">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Customer</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Payment</th>
+<th>Delivery</th>
+<th>Save</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ordersTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const API="http://localhost:5000/api";
+
+const token=localStorage.getItem("token");
+
+if(!token){window.location.href="../login.html";}
+
+const headers={
+
+"Content-Type":"application/json",
+
+Authorization:`Bearer ${token}`
+
+};
+
+async function loadOrders(){
+
+const res=await fetch(
+
+`${API}/admin/orders`,
+
+{
+
+headers
+
+}
+
+);
+
+const data=await res.json();
+
+const table=document.getElementById("ordersTable");
+
+table.innerHTML="";
+
+data.orders.forEach(order=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${order.id}</td>
+
+<td>${order.fullname}</td>
+
+<td>${order.email}</td>
+
+<td>${order.phone||""}</td>
+
+<td>KSh ${Number(order.total_amount).toLocaleString()}</td>
+
+<td>
+
+<select id="status${order.id}">
+
+<option ${order.status=="Pending"?"selected":""}>Pending</option>
+
+<option ${order.status=="Accepted"?"selected":""}>Accepted</option>
+
+<option ${order.status=="Rejected"?"selected":""}>Rejected</option>
+
+<option ${order.status=="Shipped"?"selected":""}>Shipped</option>
+
+<option ${order.status=="Delivered"?"selected":""}>Delivered</option>
+
+<option ${order.status=="Cancelled"?"selected":""}>Cancelled</option>
+
+</select>
+
+</td>
+
+<td>
+
+<select id="payment${order.id}">
+
+<option ${order.payment_status=="Pending"?"selected":""}>Pending</option>
+
+<option ${order.payment_status=="Paid"?"selected":""}>Paid</option>
+
+<option ${order.payment_status=="Failed"?"selected":""}>Failed</option>
+
+</select>
+
+</td>
+
+<td>
+
+<select id="delivery${order.id}">
+
+<option ${order.delivery_status=="Pending"?"selected":""}>Pending</option>
+
+<option ${order.delivery_status=="Preparing"?"selected":""}>Preparing</option>
+
+<option ${order.delivery_status=="Shipped"?"selected":""}>Shipped</option>
+
+<option ${order.delivery_status=="Delivered"?"selected":""}>Delivered</option>
+
+<option ${order.delivery_status=="Cancelled"?"selected":""}>Cancelled</option>
+
+</select>
+
+</td>
+
+<td>
+
+<button
+
+class="btn-primary"
+
+onclick="saveOrder(${order.id})">
+
+Save
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+async function saveOrder(id){
+
+const status=document.getElementById(`status${id}`).value;
+
+const payment_status=document.getElementById(`payment${id}`).value;
+
+const delivery_status=document.getElementById(`delivery${id}`).value;
+
+const res=await fetch(
+
+`${API}/admin/orders/${id}`,
+
+{
+
+method:"PUT",
+
+headers,
+
+body:JSON.stringify({
+
+status,
+
+payment_status,
+
+delivery_status
+
+})
+
+}
+
+);
+
+const data=await res.json();
+
+alert(data.message);
+
+loadOrders();
+
+}
+
+loadOrders();
+
+</script>
+
+</body>
+
+</html>

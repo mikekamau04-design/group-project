@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+min-height:100vh;
+
+background:linear-gradient(135deg,#0b8f4d,#ff8c00);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:30px;
+
+}
+
+.container{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+max-width:1100px;
+
+width:100%;
+
+background:#fff;
+
+border-radius:25px;
+
+overflow:hidden;
+
+box-shadow:0 20px 40px rgba(0,0,0,.2);
+
+}
+
+.left{
+
+padding:60px;
+
+background:url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200') center/cover;
+
+position:relative;
+
+color:#fff;
+
+}
+
+.left::before{
+
+content:'';
+
+position:absolute;
+
+inset:0;
+
+background:rgba(0,0,0,.55);
+
+}
+
+.content{
+
+position:relative;
+
+z-index:2;
+
+}
+
+.content h1{
+
+font-size:3rem;
+
+margin-bottom:20px;
+
+}
+
+.right{
+
+padding:60px;
+
+}
+
+.logo{
+
+font-size:2rem;
+
+font-weight:700;
+
+color:#0b8f4d;
+
+}
+
+.logo span{
+
+color:#ff8c00;
+
+}
+
+form{
+
+margin-top:30px;
+
+}
+
+.group{
+
+margin-bottom:20px;
+
+}
+
+label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-weight:500;
+
+}
+
+input,select{
+
+width:100%;
+
+padding:15px;
+
+border:1px solid #ddd;
+
+border-radius:12px;
+
+font-size:15px;
+
+}
+
+.btn{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:50px;
+
+background:#0b8f4d;
+
+color:#fff;
+
+font-size:1rem;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#06763e;
+
+}
+
+.links{
+
+display:flex;
+
+justify-content:space-between;
+
+margin:20px 0;
+
+}
+
+.links a,
+.extra a{
+
+text-decoration:none;
+
+color:#0b8f4d;
+
+}
+
+.social{
+
+display:grid;
+
+gap:12px;
+
+margin-top:20px;
+
+}
+
+.social button{
+
+padding:14px;
+
+border:1px solid #ddd;
+
+border-radius:12px;
+
+background:#fff;
+
+cursor:pointer;
+
+}
+
+#message{
+
+margin-top:15px;
+
+text-align:center;
+
+font-weight:600;
+
+}
+
+@media(max-width:900px){
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+.left{
+
+display:none;
+
+}
+
+.right{
+
+padding:40px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="left">
+
+<div class="content">
+
+<h1>Welcome Back</h1>
+
+<p>
+
+Sign in to continue shopping,
+
+track orders,
+
+manage your vendor store,
+
+and explore AFRICART.
+
+</p>
+
+<br>
+
+<h3>Features</h3>
+
+<ul style="line-height:2;margin-left:20px">
+
+<li>Track orders in real time</li>
+
+<li>Manage vendor products</li>
+
+<li>Secure checkout</li>
+
+<li>View purchase history</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="logo">
+
+AFRI<span>CART</span>
+
+</div>
+
+<h2 style="margin-top:15px">
+
+Login to Your Account
+
+</h2>
+
+<form id="loginForm">
+
+<div class="group">
+
+<label>Email Address</label>
+
+<input
+
+type="email"
+
+id="email"
+
+placeholder="Enter your email"
+
+required
+
+>
+
+</div>
+
+<div class="group">
+
+<label>Password</label>
+
+<input
+
+type="password"
+
+id="password"
+
+placeholder="Enter your password"
+
+required
+
+>
+
+</div>
+
+<div class="group">
+
+<label>Login As</label>
+
+<select id="role">
+
+<option value="customer">
+
+Customer
+
+</option>
+
+<option value="vendor">
+
+Vendor
+
+</option>
+
+<option value="admin">
+
+Administrator
+
+</option>
+
+</select>
+
+</div>
+
+<div class="links">
+
+<a href="#">
+
+Forgot Password?
+
+</a>
+
+<a href="register.html">
+
+Create Account
+
+</a>
+
+</div>
+<a href="customer-dashboard-modern.html">
+<button
+
+type="submit"
+
+class="btn" >
+
+Login
+
+</button>
+</a>
+<p id="message"></p>
+
+</form>
+
+<div class="social">
+
+<button type="button">
+
+Continue with Google
+
+</button>
+
+<button type="button">
+
+Continue with Facebook
+
+</button>
+
+</div>
+
+<div
+
+class="extra"
+
+style="margin-top:25px;text-align:center">
+
+Don't have an account?
+
+<a href="register.html">
+
+Register Here
+
+</a>
+
+<br><br>
+
+<a href="index.html">
+
+← Back to Home
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="js/api.js"></script>
+
+<script src="js/login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | Admin Dashboard</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+<h2>AFRICART</h2>
+
+<span>ADMIN PANEL</span>
+
+</div>
+
+<ul>
+
+<li class="active"><a href="admin.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+
+<li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+
+<li><a href="vendors.html"><i class="fas fa-store"></i> Vendors</a></li>
+
+<li><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+
+<li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+
+<li><a href="withdrawals.html"><i class="fas fa-money-bill-wave"></i> Withdrawals</a></li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>Dashboard</h1>
+
+<div>
+
+<span class="admin-name" id="adminName">Admin</span>
+
+<button class="btn-danger" id="logoutBtn" style="margin-left:15px;">Logout</button>
+
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Users</h3>
+<h1 id="users">0</h1>
+</div>
+
+<div class="card">
+<h3>Vendors</h3>
+<h1 id="vendors">0</h1>
+</div>
+
+<div class="card">
+<h3>Products</h3>
+<h1 id="products">0</h1>
+</div>
+
+<div class="card">
+<h3>Orders</h3>
+<h1 id="orders">0</h1>
+</div>
+
+<div class="card">
+<h3>Revenue</h3>
+<h1 id="revenue">KSh 0</h1>
+</div>
+
+<div class="card">
+<h3>Pending Withdrawals</h3>
+<h1 id="withdrawals">0</h1>
+</div>
+
+</div>
+
+<div class="recent">
+
+<h2>Recent Orders</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Customer</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="recentOrders">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>

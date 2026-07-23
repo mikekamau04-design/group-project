@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFRICART | Customer Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#f3f6fb;color:#1f2937}
+.sidebar{position:fixed;left:0;top:0;width:280px;height:100vh;background:linear-gradient(180deg,#0b8f4d,#06603a);padding:30px;color:#fff;overflow:auto}
+.logo{font-size:2rem;font-weight:800;margin-bottom:40px}.logo span{color:#ff9800}
+.profile{text-align:center;padding:20px;background:rgba(255,255,255,.1);border-radius:20px;margin-bottom:30px}
+.profile img{width:90px;height:90px;border-radius:50%;border:4px solid #fff}
+.menu a{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;padding:15px 18px;border-radius:14px;margin:10px 0;transition:.3s}
+.menu a:hover,.active{background:rgba(255,255,255,.18);transform:translateX(6px)}
+.main{margin-left:300px;padding:30px}
+.hero{background:linear-gradient(135deg,#0b8f4d,#ff9800);padding:40px;border-radius:28px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.btn{padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:600;display:inline-block;transition:.3s;border:none;cursor:pointer}
+.primary{background:#fff;color:#0b8f4d}.primary:hover{transform:translateY(-4px)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin:30px 0}
+.card{background:#fff;padding:28px;border-radius:24px;box-shadow:0 10px 25px rgba(0,0,0,.06)}
+.card h2{font-size:2rem;color:#0b8f4d}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:25px}
+.panel{background:#fff;padding:28px;border-radius:24px;box-shadow:0 10px 25px rgba(0,0,0,.06)}
+table{width:100%;border-collapse:collapse}
+th,td{padding:16px;border-bottom:1px solid #eee;text-align:left}
+.status{padding:8px 15px;border-radius:30px;font-size:.85rem;font-weight:600;white-space:nowrap}
+.status.pending{background:#fff3cd;color:#8a6d00}
+.status.processing,.status.accepted{background:#fff3cd;color:#8a6d00}
+.status.shipped{background:#e3f2fd;color:#1565c0}
+.status.delivered{background:#d4edda;color:#1b5e20}
+.status.cancelled,.status.rejected{background:#fde3e3;color:#b71c1c}
+.action{background:#0b8f4d;color:#fff;padding:10px 18px;border-radius:30px;text-decoration:none;font-size:.85rem}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.product{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.05)}
+.product img{width:100%;height:180px;object-fit:cover;background:#eee}
+.product div{padding:18px}
+.shopbtn{display:block;text-align:center;background:#ff9800;color:#fff;padding:12px;border-radius:40px;text-decoration:none;margin-top:10px}
+.empty{padding:20px;color:#70808d;text-align:center}
+@media(max-width:950px){.sidebar{position:relative;width:100%;height:auto}.main{margin-left:0}.grid,.hero{grid-template-columns:1fr;display:block}.hero a{margin-top:20px;display:inline-block}}
+</style>
+</head>
+<body>
+<div class="sidebar">
+<div class="logo">AFRI<span>CART</span></div>
+<div class="profile">
+<img id="avatarImg" src="https://ui-avatars.com/api/?name=Customer&background=ff9800&color=fff&size=128">
+<h3 id="customerName">Welcome</h3>
+<p id="customerRole">Customer</p>
+</div>
+<div class="menu">
+<a class="active" href="customer-dashboard-modern.html">🏠 Dashboard</a>
+<a href="products.html">🛍 Browse Products</a>
+<a href="track-order.html">🚚 Track Orders</a>
+<a href="orders.html">📦 My Orders</a>
+<a href="cart.html">🛒 Cart</a>
+<a href="#" id="logoutLink">🚪 Logout</a>
+</div>
+</div>
+
+<div class="main">
+<div class="hero">
+<div>
+<h1 id="heroGreeting">Welcome Back 👋</h1>
+<p>Manage orders, track deliveries and discover new products.</p>
+</div>
+<a href="products.html" class="btn primary">Continue Shopping</a>
+</div>
+
+<div class="cards">
+<div class="card"><h2 id="statTotalOrders">0</h2><p>Total Orders</p></div>
+<div class="card"><h2 id="statActive">0</h2><p>Active Deliveries</p></div>
+<div class="card"><h2 id="statDelivered">0</h2><p>Delivered Orders</p></div>
+<div class="card"><h2 id="statSpending">KSh 0</h2><p>Total Spending</p></div>
+</div>
+
+<div class="grid">
+<div class="panel">
+<h2>Recent Orders</h2><br>
+<table>
+<tr><th>Order</th><th>Status</th><th>Total</th><th></th></tr>
+<tbody id="ordersBody">
+<tr><td colspan="4" class="empty">Loading your orders...</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="panel">
+<h2>Account Summary</h2><br>
+<p><strong>Name:</strong> <span id="acctName">-</span></p><br>
+<p><strong>Email:</strong> <span id="acctEmail">-</span></p><br>
+<p><strong>Role:</strong> <span id="acctRole">-</span></p><br>
+<a href="products.html" class="shopbtn">Continue Shopping</a>
+</div>
+</div>
+
+<div class="panel" style="margin-top:30px">
+<h2>Recommended For You</h2><br>
+<div class="products" id="recommendedProducts">
+<p class="empty">Loading products...</p>
+</div>
+</div>
+</div>
+
+<script>
+// ================================
+// API URL
+// ================================
+const API = "http://localhost:5000/api";
+
+// ================================
+// AUTH GUARD
+// ================================
+const token = localStorage.getItem("token");
+const user = JSON.parse(localStorage.getItem("user") || "null");
+
+if (!token || !user || user.role !== "customer") {
+    window.location.href = "login.html";
+}
+
+const headers = { Authorization: "Bearer " + token };
+
+// ================================
+// PROFILE
+// ================================
+if (user) {
+    document.getElementById("customerName").innerText = user.fullname;
+    document.getElementById("heroGreeting").innerText = "Welcome Back, " + user.fullname.split(" ")[0] + " 👋";
+    document.getElementById("acctName").innerText = user.fullname;
+    document.getElementById("acctEmail").innerText = user.email;
+    document.getElementById("acctRole").innerText = user.role;
+    document.getElementById("avatarImg").src =
+        "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.fullname) + "&background=ff9800&color=fff&size=128";
+}
+
+// ================================
+// LOGOUT
+// ================================
+document.getElementById("logoutLink").addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "index.html";
+});
+
+// ================================
+// STATUS BADGE HELPER
+// ================================
+function statusClass(status) {
+    return (status || "pending").toLowerCase();
+}
+
+// ================================
+// LOAD ORDERS
+// ================================
+async function loadOrders() {
+    const tbody = document.getElementById("ordersBody");
+
+    try {
+        const res = await fetch(API + "/orders/my", { headers });
+        const data = await res.json();
+
+        if (!data.success || !data.orders || data.orders.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" class="empty">No orders yet. Start shopping to see them here.</td></tr>';
+            return;
+        }
+
+        const orders = data.orders;
+
+        document.getElementById("statTotalOrders").innerText = orders.length;
+
+        const delivered = orders.filter(o => (o.status || "").toLowerCase() === "delivered");
+        const active = orders.filter(o => !["delivered", "cancelled", "rejected"].includes((o.status || "").toLowerCase()));
+        const totalSpend = orders.reduce((sum, o) => sum + Number(o.total_amount || 0), 0);
+
+        document.getElementById("statDelivered").innerText = delivered.length;
+        document.getElementById("statActive").innerText = active.length;
+        document.getElementById("statSpending").innerText = "KSh " + totalSpend.toLocaleString();
+
+        tbody.innerHTML = "";
+
+        orders.slice(0, 6).forEach(order => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>#AFC${String(order.id).padStart(5, "0")}</td>
+                    <td><span class="status ${statusClass(order.status)}">${order.status || "Pending"}</span></td>
+                    <td>KSh ${Number(order.total_amount || 0).toLocaleString()}</td>
+                    <td><a class="action" href="track-order.html?id=${order.id}">Track</a></td>
+                </tr>
+            `;
+        });
+
+    } catch (error) {
+        console.error(error);
+        tbody.innerHTML = '<tr><td colspan="4" class="empty">Unable to load orders. Please check your connection.</td></tr>';
+    }
+}
+
+// ================================
+// LOAD RECOMMENDED PRODUCTS
+// ================================
+async function loadRecommended() {
+    const container = document.getElementById("recommendedProducts");
+
+    try {
+        const res = await fetch(API + "/products");
+        const data = await res.json();
+
+        if (!data.success || !data.products || data.products.length === 0) {
+            container.innerHTML = '<p class="empty">No products available yet.</p>';
+            return;
+        }
+
+        container.innerHTML = "";
+
+        data.products.slice(0, 6).forEach(product => {
+            const image = product.image
+                ? `http://localhost:5000/uploads/products/${product.image}`
+                : "https://via.placeholder.com/400x300?text=No+Image";
+
+            container.innerHTML += `
+                <div class="product">
+                    <img src="${image}">
+                    <div>
+                        <h3>${product.name}</h3>
+                        <p>KSh ${Number(product.price).toLocaleString()}</p>
+                        <a class="shopbtn" href="product-details.html?id=${product.id}">View Product</a>
+                    </div>
+                </div>
+            `;
+        });
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = '<p class="empty">Unable to load products. Please check your connection.</p>';
+    }
+}
+
+loadOrders();
+loadRecommended();
+</script>
+</body>
+</html>

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFRICART | My Orders</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#222;
+}
+
+header{
+background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 5%;
+}
+
+.logo{
+font-size:2rem;
+font-weight:700;
+color:#0b8f4d;
+}
+
+.logo span{
+color:#ff8c00;
+}
+
+.search{
+flex:1;
+margin:0 30px;
+}
+
+.search input{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:40px;
+outline:none;
+}
+
+.links a{
+text-decoration:none;
+color:#222;
+margin-left:18px;
+font-weight:500;
+transition:.3s;
+}
+
+.links a:hover{
+color:#0b8f4d;
+}
+
+nav{
+background:#0b8f4d;
+padding:14px 5%;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+margin-right:20px;
+font-weight:500;
+}
+
+.container{
+padding:40px 5%;
+}
+
+.page-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+margin-bottom:30px;
+gap:15px;
+}
+
+.page-title h1{
+font-size:2.2rem;
+}
+
+.orders-box{
+background:#fff;
+border-radius:20px;
+padding:25px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.order-card{
+border:1px solid #eee;
+border-radius:15px;
+padding:25px;
+margin-bottom:20px;
+transition:.3s;
+}
+
+.order-card:hover{
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.status{
+padding:8px 18px;
+border-radius:30px;
+color:#fff;
+font-size:14px;
+font-weight:600;
+}
+
+.pending{
+background:#ff9800;
+}
+
+.processing{
+background:#2196f3;
+}
+
+.shipped{
+background:#673ab7;
+}
+
+.delivered{
+background:#0b8f4d;
+}
+
+.cancelled{
+background:#e53935;
+}
+
+.order-details{
+margin-top:20px;
+line-height:2;
+}
+
+.buttons{
+margin-top:25px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:12px 22px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-weight:600;
+font-size:15px;
+text-decoration:none;
+color:#fff;
+}
+
+.track-btn{
+background:#0b8f4d;
+}
+
+.view-btn{
+background:#ff8c00;
+}
+
+.cancel-btn{
+background:#e53935;
+}
+
+.empty{
+text-align:center;
+padding:70px 20px;
+color:#666;
+}
+
+.empty h2{
+margin-bottom:15px;
+}
+
+footer{
+background:#111827;
+color:#fff;
+padding:50px 5%;
+margin-top:60px;
+text-align:center;
+}
+
+footer a{
+color:#fff;
+text-decoration:none;
+margin:0 8px;
+}
+
+@media(max-width:900px){
+
+.top{
+flex-direction:column;
+gap:15px;
+}
+
+.search{
+margin:0;
+width:100%;
+}
+
+.page-title{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.row{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.buttons{
+flex-direction:column;
+}
+
+.btn{
+width:100%;
+text-align:center;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="top">
+
+<div class="logo">
+
+AFRI<span>CART</span>
+
+</div>
+
+<div class="search">
+
+<input
+type="text"
+placeholder="Search your orders...">
+
+</div>
+
+<div class="links" id="userMenu">
+
+<a href="login.html">Login</a>
+
+<a href="register.html">Register</a>
+
+<a href="cart.html">🛒 Cart <span id="cartCount">(0)</span></a>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="products.html">Products</a>
+
+<a href="orders.html">My Orders</a>
+
+<a href="cart.html">Cart</a>
+
+<a href="track-order.html">Track Order</a>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="page-title">
+
+<div>
+
+<h1>My Orders</h1>
+
+<p>View and manage all your AFRICART orders.</p>
+
+</div>
+
+<h3 id="orderCount">
+
+Loading...
+
+</h3>
+
+</div>
+
+<div
+class="orders-box"
+id="ordersContainer">
+
+<div class="empty">
+
+<h2>Loading Orders...</h2>
+
+<p>Please wait.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>
+
+AFRI<span style="color:#ff8c00;">CART</span>
+
+</h2>
+
+<p style="margin-top:15px;">
+
+Connecting customers with trusted African vendors.
+
+</p>
+
+<p style="margin-top:20px;">
+
+<a href="index.html">Home</a> |
+
+<a href="products.html">Products</a> |
+
+<a href="cart.html">Cart</a> |
+
+<a href="checkout.html">Checkout</a>
+
+</p>
+
+</footer>
+
+<script src="js/site-header.js"></script>
+<script>
+
+const API="http://localhost:5000/api";
+
+const token=localStorage.getItem("token");
+
+// =====================================
+// LOAD ORDERS
+// =====================================
+
+async function loadOrders(){
+
+if(!token){
+
+alert("Please login first.");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const response=await fetch(`${API}/orders/my`,{
+
+headers:{
+
+Authorization:`Bearer ${token}`
+
+}
+
+});
+
+const data=await response.json();
+
+const container=document.getElementById("ordersContainer");
+
+container.innerHTML="";
+
+if(!data.success){
+
+container.innerHTML=`
+
+<div class="empty">
+
+<h2>Unable to load orders</h2>
+
+<p>${data.message}</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+document.getElementById("orderCount").innerHTML=
+
+`${data.orders.length} Order(s)`;
+
+if(data.orders.length===0){
+
+container.innerHTML=`
+
+<div class="empty">
+
+<h2>No Orders Yet</h2>
+
+<p>
+
+You haven't placed any orders yet.
+
+</p>
+
+<br>
+
+<a
+
+href="products.html"
+
+class="btn track-btn">
+
+Start Shopping
+
+</a>
+
+</div>
+
+`;
+
+return;
+
+}
+
+data.orders.forEach(order=>{
+
+let statusClass="pending";
+
+if(order.status==="Processing")
+
+statusClass="processing";
+
+if(order.status==="Shipped")
+
+statusClass="shipped";
+
+if(order.status==="Delivered")
+
+statusClass="delivered";
+
+if(order.status==="Cancelled")
+
+statusClass="cancelled";
+
+container.innerHTML+=`
+
+<div class="order-card">
+
+<div class="row">
+
+<div>
+
+<h2>
+
+Order #${order.id}
+
+</h2>
+
+<p>
+
+${new Date(order.created_at).toLocaleString()}
+
+</p>
+
+</div>
+
+<div>
+
+<span class="status ${statusClass}">
+
+${order.status}
+
+</span>
+
+</div>
+
+</div>
+
+<div class="order-details">
+
+<p>
+
+<strong>Total:</strong>
+
+KSh ${Number(order.total).toLocaleString()}
+
+</p>
+
+<p>
+
+<strong>Delivery Fee:</strong>
+
+KSh ${Number(order.delivery_fee).toLocaleString()}
+
+</p>
+
+<p>
+
+<strong>Phone:</strong>
+
+${order.phone}
+
+</p>
+
+<p>
+
+<strong>Delivery Location:</strong>
+
+${order.delivery_location}
+
+</p>
+
+<p>
+
+<strong>Items:</strong>
+
+${order.items || 0}
+
+</p>
+
+</div>
+
+<div class="buttons">
+
+<a
+
+href="order-details.html?id=${order.id}"
+
+class="btn view-btn">
+
+View Order
+
+</a>
+
+<a
+
+href="track-order.html?id=${order.id}"
+
+class="btn track-btn">
+
+Track Order
+
+</a>
+
+${order.status==="Pending"
+
+?
+
+`<button
+
+class="btn cancel-btn"
+
+onclick="cancelOrder(${order.id})">
+
+Cancel Order
+
+</button>`
+
+:
+
+""
+
+}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}catch(error){
+
+console.log(error);
+
+document.getElementById("ordersContainer").innerHTML=`
+
+<div class="empty">
+
+<h2>Server Error</h2>
+
+<p>
+
+Unable to connect to AFRICART server.
+
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+// =====================================
+// CANCEL ORDER
+// =====================================
+
+async function cancelOrder(orderId){
+
+const confirmCancel=confirm(
+"Are you sure you want to cancel this order?"
+);
+
+if(!confirmCancel) return;
+
+try{
+
+const response=await fetch(
+
+`${API}/orders/cancel/${orderId}`,
+
+{
+
+method:"PUT",
+
+headers:{
+
+Authorization:`Bearer ${token}`
+
+}
+
+}
+
+);
+
+const data=await response.json();
+
+if(data.success){
+
+alert("Order cancelled successfully.");
+
+loadOrders();
+
+}else{
+
+alert(data.message);
+
+}
+
+}catch(error){
+
+console.log(error);
+
+alert("Unable to cancel order.");
+
+}
+
+}
+
+// =====================================
+// SEARCH ORDERS
+// =====================================
+
+document.querySelector(".search input")
+.addEventListener("keyup",function(){
+
+const value=this.value.toLowerCase();
+
+const cards=document.querySelectorAll(".order-card");
+
+cards.forEach(card=>{
+
+const text=card.innerText.toLowerCase();
+
+if(text.includes(value)){
+
+card.style.display="block";
+
+}else{
+
+card.style.display="none";
+
+}
+
+});
+
+});
+
+// =====================================
+// AUTO LOAD
+// =====================================
+
+loadOrders();
+
+</script>
+
+</body>
+
+</html>
